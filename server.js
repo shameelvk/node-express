@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv").config({ path: "./config/config.env" });
 const cource = require("./routes/courses");
+const user = require("./routes/users");
 const logger = require("./middlewires/logger");
 const erroHandler = require("./middlewires/errorHandler");
 
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
   res.status(200).json({ status: true, message: "welcome to Node js" });
 });
 
+app.use("/api/vi/user/", user);
 app.use("/api/vi/cource/", cource);
 
 app.use(erroHandler);

@@ -1,5 +1,3 @@
-const pool = require("../config/db");
-const courceQuires = require("../queries/cource");
 const {
   getAllCources,
   getcourceById,
