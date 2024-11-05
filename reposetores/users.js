@@ -21,6 +21,19 @@ const adduser = (name, username, password) => {
   });
 };
 
+const isUserExisitByUsername = (username) => {
+  return new Promise((resolve, reject) => {
+    pool.query(userQuires.getUserByUsername, [username], (error, result) => {
+      if (error) {
+        reject(false);
+      } else {
+        resolve(result.rows);
+      }
+    });
+  });
+};
+
 module.exports = {
   adduser,
+  isUserExisitByUsername,
 };
