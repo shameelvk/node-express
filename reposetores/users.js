@@ -3,8 +3,6 @@ const userQuires = require("../queries/user");
 const { hashPassword } = require("../utils/passwordHaser");
 
 const adduser = (name, username, password) => {
-  console.log("haai");
-
   const hashPass = hashPassword(password);
   return new Promise((resolve, reject) => {
     pool.query(
@@ -14,7 +12,9 @@ const adduser = (name, username, password) => {
         if (err) {
           reject(err);
         } else {
-          resolve(result.rows);
+          console.log(result.rows);
+          const userId = result.rows ? result.rows[0].id : 0;
+          resolve(userId);
         }
       }
     );

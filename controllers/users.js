@@ -1,10 +1,16 @@
 const { adduser } = require("../reposetores/users");
+const { createJwt } = require("../utils/jwtHelper");
 
 const addUser = async (req, res, next) => {
   const { name, username, password } = req.body;
   try {
-    await adduser(name, username, password);
-    res.status(201).json({ message: "User added sucessfully" });
+    const userId = await adduser(name, username, password);
+    if (userId) {
+      const token = createJwt(userId);
+      res
+        .status(201)
+        .json({ message: "User added sucessfully", token: token, name: name });
+    }
   } catch (error) {
     next(error);
   }
